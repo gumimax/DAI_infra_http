@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  nodeserver:
+    build:
+      context: ./express_image
+    ports:
+        - "9091:3000"
+  apache:
+    build:
+      context: ./apache_php_image
+    ports:
+        - "9090:80"
