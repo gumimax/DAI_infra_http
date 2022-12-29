@@ -1,12 +1,12 @@
 version: "3.9"
 services:
-  dockermanagement:
+  docker_management:
     image: portainer/portainer-ce
     ports:
       - "3636:9000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-  reverse-proxy:
+  reverse_proxy:
     image: traefik:v2.9.6
     command: --api.insecure=true --providers.docker
     ports:
@@ -14,7 +14,7 @@ services:
         - "8080:8080"
     volumes:
         - /var/run/docker.sock:/var/run/docker.sock
-  nodeserver:
+  node_server:
     deploy:
       replicas: 3
     build:
@@ -23,7 +23,7 @@ services:
         - "3000"
     labels:
         - "traefik.http.routers.nodeserver.rule=Host(`localhost`) && PathPrefix(`/api`)"
-  apache:
+  apache_server:
     deploy:
       replicas: 3
     build:
@@ -32,3 +32,5 @@ services:
         - "80"
     labels:
         - "traefik.http.routers.apache.rule=Host(`localhost`)"
+        - "traefik.http.services.apache.loadbalancer.sticky=true"
+        - "traefik.http.services.apache.loadbalancer.sticky.cookie.name=test"
