@@ -209,7 +209,7 @@ nous répond.
 ![classes](./img/apache1.png)
 
 Si on arrête le serveur apache numéro 2, c'est directement le 1 qui reprend le 
-relais quand on recharge la page. 
+relais quand on recharge la page. Les sticky session fonctionnent donc correctement. 
 
 ---
 ## Etape 6: Management UI
