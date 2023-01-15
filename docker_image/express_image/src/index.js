@@ -10,7 +10,7 @@ app.get('/api', function(req, res) {
 });
 
 app.listen(3000, function (){
-	console.log('Accepting http resquets on port 3000.');
+	console.log('Accepting http requests on port 3000.');
 });
 
 function generateQuote(){

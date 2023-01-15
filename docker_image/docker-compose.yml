@@ -22,7 +22,7 @@ services:
     ports:
         - "3000"
     labels:
-        - "traefik.http.routers.nodeserver.rule=Host(`localhost`) && PathPrefix(`/api`)"
+        - "traefik.http.routers.node_server.rule=Host(`localhost`) && PathPrefix(`/api`)"
   apache_server:
     deploy:
       replicas: 3
@@ -31,6 +31,6 @@ services:
     ports:
         - "80"
     labels:
-        - "traefik.http.routers.apache.rule=Host(`localhost`)"
-        - "traefik.http.services.apache.loadbalancer.sticky=true"
-        - "traefik.http.services.apache.loadbalancer.sticky.cookie.name=test"
+        - "traefik.http.routers.apache_server.rule=Host(`localhost`)"
+        - "traefik.http.services.apache_server.loadbalancer.sticky=true"
+        - "traefik.http.services.apache_server.loadbalancer.sticky.cookie.name=test"

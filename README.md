@@ -152,20 +152,52 @@ localhost:8080
 ## Etape 3a: Instance multiple
 
 
-Pour lancer plusieurs containers avec la même image il suffit d'ajouter le tag 
+Pour lancer plusieurs containers avec la même image il suffit d'ajouter les tags
 ```
-replicas: x
+    deploy:
+      replicas: x
 ```
-avec x le nombre d'instances voulues. 
+avec x le nombre d'instances voulues dans les services définit dans .yml
 
-Un peu constater qu'une fois l'infrastructure deployée, les requêtes GET envoyées 
-depuis le navigateur sont répondues par les différentes instances. 
+Un peu constater dans le terminal qu'une fois l'infrastructure deployée, les 
+requêtes GET envoyées depuis le navigateur sont répondues par les différentes  
+instances. Le load balancing en round-robin fonctionne. 
 
 ---
 ## Etape 4: Requêtes ajax avec JQuery
+
+Pour cette étape, nous avons dû modifier l'image du serveur http statique
+pour y ajouter un script (quote.js) ainsi que la libraire Jquery.js. 
+
+Le script permet de récupérer une ressource JSON toutes les 2 secondes et de 
+modifier certaines lignes de texte de la page html. Il va donc récupérer les 
+quotes générées à sa demande sur le serveur dynamique à l'adresse localhost/api et 
+les afficher sur le site internet en modifiant certains textes toutes les deux 
+secondes. Le site web est donc bien modifié dynamiquement.
+
+---
+## Etape 5: Load balancing: round-robin et sticky sessions
+Pour activer les sticky sessions, il faut ajouter de nouvelles règles dans le .yml.
+On va ajouter les règles suivantes pour le service apache_server:
+
+```
+"traefik.http.services.apache_server.loadbalancer.sticky=true"
+"traefik.http.services.apache_server.loadbalancer.sticky.cookie.name=test"
+```
+Pour vérifier le fonctionnement, voici les étapes que nous avons effectuées:
+
 
 
 
 ---
 ## Etape 6: Management UI
 
+Après une recherche sur google, il s'avère qu'un service nommé portainer existe 
+et permet la gestion de containers dockers et autres via une interface web. 
+
+Nous l'avons donc ajouté au fichier .yml pour que l'interface de gestion soit 
+aussi déployée. L'interface est accessible à l'addresse: localhost:3636. 
+
+Une fois connecté, on remarque que l'interface est simple d'utilisation et que les 
+containeurs docker sont déjà visibles. On peut les sélectionner pour les stopper, 
+redémarrer etc.. 
