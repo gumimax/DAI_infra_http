@@ -143,10 +143,28 @@ devrait être:
  ```
 command: --api.insecure=true --providers.docker
 ```
-- On peut acceder à l'interface de traefic à l'adresse suivant:
+- On peut accéder à l'interface de traefik à l'adresse suivante:
  ```
 localhost:8080
 ```
+---
+
+## Etape 3a: Instance multiple
+
+
+Pour lancer plusieurs containers avec la même image il suffit d'ajouter le tag 
+```
+replicas: x
+```
+avec x le nombre d'instances voulues. 
+
+Un peu constater qu'une fois l'infrastructure deployée, les requêtes GET envoyées 
+depuis le navigateur sont répondues par les différentes instances. 
+
+---
+## Etape 4: Requêtes ajax avec JQuery
+
+
 
 ---
 ## Etape 6: Management UI
