@@ -186,8 +186,30 @@ On va ajouter les règles suivantes pour le service apache_server:
 ```
 Pour vérifier le fonctionnement, voici les étapes que nous avons effectuées:
 
+#### Round-robin serveurs dynamiques:
 
+Après avoir lancé plusieurs instances de l'image, on se connecte à l'un des 
+serveurs statiques. Les serveurs dynamiques vont répondre chacun leur tour aux 
+requêtes ajax du serveur static. 
+![classes](./img/nodes1-2-3.png)
 
+Ensuite, on exit un des serveurs nodes:
+
+![classes](./img/node2-3.png)
+
+On constate que les requêtes sont toujours correctement réparties. 
+
+#### Sticky sessions serveurs statiques:
+
+On va se rendre à l'adresse du site internet. On constate qu'on se voit assigner 
+un serveur apache. Si on recharge la page, c'est toujours le même serveur qui 
+nous répond.
+![classes](./img/apache2.png)
+
+![classes](./img/apache1.png)
+
+Si on arrête le serveur apache numéro 2, c'est directement le 1 qui reprend le 
+relais quand on recharge la page. 
 
 ---
 ## Etape 6: Management UI
